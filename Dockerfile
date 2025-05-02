@@ -30,7 +30,7 @@ RUN pip install uv
 RUN uv pip install comfy-cli --system
 
 # Install ComfyUI
-RUN /usr/bin/yes | comfy --workspace /comfyui install --version 0.3.30 --cuda-version 12.6 --nvidia
+RUN /usr/bin/yes | comfy --workspace /comfyui install --version 0.3.30 --cuda-version 12.6 --nvidia --skip-manager
 
 # Change working directory to ComfyUI
 WORKDIR /comfyui
