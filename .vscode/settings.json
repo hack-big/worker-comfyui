@@ -12,6 +12,7 @@
         "safetensors",
         "sdxl",
         "sentencepiece",
-        "unet"
+        "unet",
+        "useblacksmith"
     ]
 }
