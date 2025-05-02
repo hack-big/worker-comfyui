@@ -1,10 +1,17 @@
 {
     "cSpell.words": [
+        "autoremove",
         "cuda",
+        "cudnn",
+        "einops",
         "gguf",
+        "libgl",
+        "noninteractive",
+        "PYTHONUNBUFFERED",
         "runpod",
         "safetensors",
         "sdxl",
+        "sentencepiece",
         "unet"
     ]
 }
