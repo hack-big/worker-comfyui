@@ -68,15 +68,40 @@ WORKDIR /comfyui
 # Create necessary directories upfront
 RUN mkdir -p models/checkpoints models/vae models/unet models/clip
 
-RUN wget -O models/checkpoints/sd_xl_base_1.0.safetensors https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors && \
-      wget -O models/vae/sdxl_vae.safetensors https://huggingface.co/stabilityai/sdxl-vae/resolve/main/sdxl_vae.safetensors && \
-      wget -O models/vae/sdxl-vae-fp16-fix.safetensors https://huggingface.co/madebyollin/sdxl-vae-fp16-fix/resolve/main/sdxl_vae.safetensors; \
-      wget --header="Authorization: Bearer ${HUGGINGFACE_ACCESS_TOKEN}" -O models/checkpoints/sd3_medium_incl_clips_t5xxlfp8.safetensors https://huggingface.co/stabilityai/stable-diffusion-3-medium/resolve/main/sd3_medium_incl_clips_t5xxlfp8.safetensors; \
-      wget --header="Authorization: Bearer ${HUGGINGFACE_ACCESS_TOKEN}" -O models/unet/flux1-dev.safetensors https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/flux1-dev.safetensors && \
-      wget -O models/clip/clip_l.safetensors https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/clip_l.safetensors && \
-      wget -O models/clip/t5xxl_fp8_e4m3fn.safetensors https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp8_e4m3fn.safetensors && \
-      wget --header="Authorization: Bearer ${HUGGINGFACE_ACCESS_TOKEN}" -O models/vae/ae.safetensors https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/ae.safetensors; \
-      wget --header="Authorization: Bearer ${HUGGINGFACE_ACCESS_TOKEN}" -O models/unet/flux1-dev-Q4_0.gguf https://huggingface.co/city96/FLUX.1-dev-gguf/resolve/main/flux1-dev-Q4_0.gguf;
+# Download SDXL Base model
+RUN wget -O models/checkpoints/sd_xl_base_1.0.safetensors \
+    https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors
+
+# Download SDXL VAE models
+RUN wget -O models/vae/sdxl_vae.safetensors \
+    https://huggingface.co/stabilityai/sdxl-vae/resolve/main/sdxl_vae.safetensors
+    
+RUN wget -O models/vae/sdxl-vae-fp16-fix.safetensors \
+    https://huggingface.co/madebyollin/sdxl-vae-fp16-fix/resolve/main/sdxl_vae.safetensors
+
+# Download SD3 model
+RUN wget --header="Authorization: Bearer ${HUGGINGFACE_ACCESS_TOKEN}" \
+    -O models/checkpoints/sd3_medium_incl_clips_t5xxlfp8.safetensors \
+    https://huggingface.co/stabilityai/stable-diffusion-3-medium/resolve/main/sd3_medium_incl_clips_t5xxlfp8.safetensors
+
+# Download FLUX models
+RUN wget --header="Authorization: Bearer ${HUGGINGFACE_ACCESS_TOKEN}" \
+    -O models/unet/flux1-dev.safetensors \
+    https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/flux1-dev.safetensors
+
+RUN wget -O models/clip/clip_l.safetensors \
+    https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/clip_l.safetensors
+
+RUN wget -O models/clip/t5xxl_fp8_e4m3fn.safetensors \
+    https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp8_e4m3fn.safetensors
+
+RUN wget --header="Authorization: Bearer ${HUGGINGFACE_ACCESS_TOKEN}" \
+    -O models/vae/ae.safetensors \
+    https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/ae.safetensors
+
+RUN wget --header="Authorization: Bearer ${HUGGINGFACE_ACCESS_TOKEN}" \
+    -O models/unet/flux1-dev-Q4_0.gguf \
+    https://huggingface.co/city96/FLUX.1-dev-gguf/resolve/main/flux1-dev-Q4_0.gguf
 
 # Stage 3: Final image
 FROM base AS final
