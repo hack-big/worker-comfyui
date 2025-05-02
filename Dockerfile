@@ -42,7 +42,7 @@ WORKDIR /comfyui
 WORKDIR /
 
 # install dependencies
-RUN uv pip install runpod requests re gguf einops==0.8.0 \
+RUN uv pip install runpod requests gguf einops==0.8.0 \
     transformers>=4.37.2 diffusers sentencepiece>=0.2.0 protobuf>=4.25.5 --system
 
 # Add files
