@@ -15,7 +15,7 @@ variable "HUGGINGFACE_ACCESS_TOKEN" {
 }
 
 group "default" {
-  targets = ["base", "sdxl", "sd3", "flux1-schnell", "flux1-dev"]
+  targets = ["base", "sdxl", "sd3", "flux1-dev-fp8", "flux1-dev", "sdxl-wai"]
 }
 
 target "base" {
@@ -37,6 +37,17 @@ target "sdxl" {
   inherits = ["base"]
 }
 
+target "sdxl-wai" {
+  context = "."
+  dockerfile = "Dockerfile"
+  target = "final"
+  args = {
+    MODEL_TYPE = "sdxl-wai"
+  }
+  tags = ["${DOCKERHUB_REPO}/${DOCKERHUB_IMG}:${RELEASE_VERSION}-sdxl-wai"]
+  inherits = ["base"]
+}
+
 target "sd3" {
   context = "."
   dockerfile = "Dockerfile"
@@ -49,15 +60,15 @@ target "sd3" {
   inherits = ["base"]
 }
 
-target "flux1-schnell" {
+target "flux1-dev-fp8" {
   context = "."
   dockerfile = "Dockerfile"
   target = "final"
   args = {
-    MODEL_TYPE = "flux1-schnell"
+    MODEL_TYPE = "flux1-dev-fp8"
     HUGGINGFACE_ACCESS_TOKEN = "${HUGGINGFACE_ACCESS_TOKEN}"
   }
-  tags = ["${DOCKERHUB_REPO}/${DOCKERHUB_IMG}:${RELEASE_VERSION}-flux1-schnell"]
+  tags = ["${DOCKERHUB_REPO}/${DOCKERHUB_IMG}:${RELEASE_VERSION}-flux1-dev-fp8"]
   inherits = ["base"]
 }
 
