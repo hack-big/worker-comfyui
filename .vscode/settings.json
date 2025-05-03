@@ -3,6 +3,7 @@
         "autoremove",
         "cuda",
         "cudnn",
+        "DOCKERHUB",
         "einops",
         "gguf",
         "libgl",
