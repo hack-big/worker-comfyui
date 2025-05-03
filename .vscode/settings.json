@@ -1,6 +1,7 @@
 {
     "cSpell.words": [
         "autoremove",
+        "buildx",
         "cuda",
         "cudnn",
         "DOCKERHUB",
@@ -13,6 +14,7 @@
         "safetensors",
         "sdxl",
         "sentencepiece",
+        "TOOLSDIRECTORY",
         "unet",
         "useblacksmith"
     ]
